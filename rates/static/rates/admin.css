@@ -1,0 +1,46 @@
+/* L'admin garde sa structure, seules les variables de theme changent. */
+
+:root {
+    --primary: #d4a847;
+    --primary-fg: #17130a;
+    --secondary: #111118;
+    --accent: #f0c866;
+    --header-color: #c9bfae;
+    --header-branding-color: #d4a847;
+    --header-link-color: #f5f0e8;
+    --link-fg: #8a6d24;
+    --link-hover-color: #b8892e;
+    --link-selected-fg: #6d5518;
+    --button-bg: #d4a847;
+    --button-fg: #17130a;
+    --button-hover-bg: #b8892e;
+    --default-button-bg: #111118;
+    --default-button-hover-bg: #2a2a35;
+    --selected-row: #fdf6e3;
+    --breadcrumbs-link-fg: #c9bfae;
+}
+
+.inline-group .tabular td.original p {
+    font-size: 11px;
+}
+
+.inline-group .tabular tr.form-row td {
+    padding: 8px 10px;
+    vertical-align: top;
+}
+
+.inline-group .tabular ul.errorlist {
+    margin: 0 0 4px;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.inline-group .tabular ul.errorlist li {
+    padding: 4px 6px;
+}
+
+/* Une ligne fautive doit se voir sur une capture, pas seulement au survol du champ. */
+.inline-group .tabular tr.form-row:has(ul.errorlist) {
+    background: #fdf3f2;
+}

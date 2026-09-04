@@ -1,0 +1,5 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}{{ block.super }}
+{% if validate_url %}<script id="rate-validation-config" type="application/json">{"url": "{{ validate_url }}"}</script>{% endif %}
+{% endblock %}
