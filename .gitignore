@@ -1,0 +1,13 @@
+# Environnement virtuel
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Base locale, reconstruite par migrate puis seed_demo
+db.sqlite3
+
+# Archives
+*.zip
+*.ZIP
