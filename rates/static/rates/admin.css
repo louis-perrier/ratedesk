@@ -1,4 +1,4 @@
-/* L'admin garde sa structure, seules les variables de theme changent. */
+/* L'admin garde sa structure, seuls le theme et la densite de l'inline changent. */
 
 :root {
     --primary: #d4a847;
@@ -8,25 +8,66 @@
     --header-color: #c9bfae;
     --header-branding-color: #d4a847;
     --header-link-color: #f5f0e8;
-    --link-fg: #8a6d24;
-    --link-hover-color: #b8892e;
-    --link-selected-fg: #6d5518;
+    --breadcrumbs-bg: #1c1c26;
+    --breadcrumbs-fg: #8d8574;
+    --breadcrumbs-link-fg: #d9d2c4;
     --button-bg: #d4a847;
     --button-fg: #17130a;
     --button-hover-bg: #b8892e;
     --default-button-bg: #111118;
     --default-button-hover-bg: #2a2a35;
+}
+
+/* Ces quatre valeurs supposent un fond clair, le bloc suivant tient le cas sombre.
+   Sans cette separation elles fuient sur le theme sombre de l'admin. */
+html[data-theme="light"],
+:root {
+    --link-fg: #8a6d24;
+    --link-hover-color: #b8892e;
+    --link-selected-fg: #6d5518;
     --selected-row: #fdf6e3;
-    --breadcrumbs-link-fg: #c9bfae;
+    --row-invalid: #fdf3f2;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --link-fg: #e2c375;
+        --link-hover-color: #f0c866;
+        --link-selected-fg: #c9a24a;
+        --selected-row: #2a2415;
+        --row-invalid: #3a2220;
+    }
+}
+
+/* Django rappelle le __str__ de la ligne dans un <p> absolu et lui reserve 2em
+   en haut de chaque cellule. Les colonnes le redisent deja, donc il part. */
 .inline-group .tabular td.original p {
-    font-size: 11px;
+    display: none;
 }
 
-.inline-group .tabular tr.form-row td {
-    padding: 8px 10px;
-    vertical-align: top;
+.inline-group .tabular tr.form-row.has_original td {
+    padding-top: 8px;
+}
+
+/* Largeurs figees : sans elles, une erreur qui apparait elargit sa colonne
+   et decale toute la ligne pendant la saisie. */
+.inline-group .tabular th.column-price,
+.inline-group .tabular th.column-min_stay_nights,
+.inline-group .tabular th.column-cancellation_days {
+    width: 13em;
+}
+
+.inline-group .tabular th.column-active {
+    width: 4em;
+}
+
+.inline-group .tabular input[type="number"] {
+    width: 6em;
+}
+
+.inline-group .tabular .vTextField {
+    width: 100%;
+    max-width: 18em;
 }
 
 .inline-group .tabular ul.errorlist {
@@ -42,5 +83,5 @@
 
 /* Une ligne fautive doit se voir sur une capture, pas seulement au survol du champ. */
 .inline-group .tabular tr.form-row:has(ul.errorlist) {
-    background: #fdf3f2;
+    background: var(--row-invalid);
 }
